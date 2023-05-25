@@ -10,6 +10,7 @@ import {
   MDBBtn,
   MDBValidation,
   MDBValidationItem,
+  MDBBadge,
   MDBInput,
   MDBCheckbox,
   MDBCard,
@@ -32,9 +33,22 @@ function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
-
+  const [EmailMessage, setEmailMessage]  = useState('')
+  const [PasswordMessage,setPasswordMessage]= useState('')
+  
   const handleLogin = async () => {
     const res = await Auth_service.login(email,pass);
+    if (res.message === 'Incorrect password please try again!'){
+      setPasswordMessage(res.message)
+      setEmailMessage('')
+    }
+    if (res.message === 'Email not match'){
+      setEmailMessage(res.message)
+    }
+    if (res.message === '') {
+      setPasswordMessage('')
+      setEmailMessage('')
+    }
     console.log(res)
     if (res.data.status  === true){
       setData({
@@ -53,6 +67,8 @@ function Login() {
     // }
   }
   
+  
+
   return (
     // <MDBContainer fluid className="p-3 my-5">
     <>
@@ -80,14 +96,14 @@ function Login() {
               
               <MDBCardBody className='p-5 w-100 d-flex flex-column text-center'>
                 <h2 className="fw-bold mb-5">LOGIN</h2>
-                
+                <MDBBadge pill light color='warning'>{EmailMessage}</MDBBadge>
                 <MDBInput wrapperClass='mb-4' label='Email address' id='formControlLg' type='email' size="lg" onChange={(e)=>{setEmail(e.target.value)}}/>
+                <MDBBadge pill light color='warning'>{PasswordMessage}</MDBBadge>
                 <MDBInput wrapperClass='mb-4' label='Password' id='formControlLg' type='password' size="lg" onChange={(e)=>{setPass(e.target.value)}}/>
 
 
                 <div className="d-flex justify-content-between mx-4 mb-4">
                   <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
-                  <a href="!#">Forgot password?</a>
                 </div>
 
                 <MDBBtn className="mb-4 w-100" size="lg" onClick={()=>{handleLogin()}}>Login</MDBBtn>

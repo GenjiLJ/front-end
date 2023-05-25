@@ -55,10 +55,12 @@ const WebcamCapture = () => {
     setCounter(counter+1)
 
   }
+  const initCount = 0
+  const count = initCount +1
   const isLogin = localStorage.getItem('isLogin') || false;
   const card = localStorage.getItem('card')||false
   const Authenticated = localStorage.getItem('Authenticated');
-    // console.log(isLogin)
+  localStorage.setItem('count', counter)
   if(isLogin === false) {
     return <Navigate to='/login'/>
   }  
@@ -72,12 +74,8 @@ const WebcamCapture = () => {
     return <Navigate to='/login'/>
   }
   if(accuracy>80){
-    // const date = Date()
-    // const expDate= date + 3
     localStorage.setItem('Authenticated',true)
-    // if(Date.now()===expDate){
     return <Navigate to='/card'/>
-    // }  
   }
 
 

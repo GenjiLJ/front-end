@@ -12,6 +12,7 @@ import {
   MDBContainer,
   MDBCard,
   MDBCardBody,
+  MDBBadge,
   MDBCol,
   MDBRow,
   MDBInput,
@@ -31,8 +32,33 @@ function Signup() {
   const [pass1, setPass1] = useState('');
   const [pass2, setPass2] = useState('');
   const [username, setUsername] = useState('');
+  const [MessageUsername,setMessageUsername] = useState('')
+  const [MessageEmail,setMessageEmail] = useState('')
+  const [MessagePassword,setMessagePassword] = useState('')
+  const [MessagePassword2,setMessagePassword2] = useState('')
   const handleSignup = async () => {
     const res = await Auth_service.signup(username,email,pass1,pass2, imageUrl);
+    if(res.message === 'Email already exists' ){
+      setMessageEmail(res.message)
+    }
+    if(res.message === 'Email must be greater than 12 characters' ){
+      setMessageEmail(res.message)
+    }
+    if(res.message === 'Username must be greater than 4 characters' ){
+      setMessageUsername(res.message)
+      setMessageEmail('')
+    }
+    if(res.message === 'Password Dont match' ){
+      setMessagePassword(res.message)
+      setMessagePassword2('')
+      setMessageEmail('')
+      setMessageUsername('')
+    }
+    if(res.message === 'Password must be greater than 7 characters' ){
+      setMessagePassword2(res.message)
+      setMessageEmail('')
+      setMessageUsername('')
+    }
     console.log(res)
     console.log(res?.status);
     if (res.status  === true){
@@ -68,9 +94,13 @@ function Signup() {
             <MDBCardBody className='p-5 w-100 d-flex flex-column text-center'>
 
               <h2 className="fw-bold mb-5">Sign up</h2>
-              <MDBInput wrapperClass='mb-4' label='Username' id='form1' type='text' onChange={(e)=>{setUsername(e.target.value)}}/>
+              <MDBBadge pill light color='warning'>{MessageEmail}</MDBBadge>
               <MDBInput wrapperClass='mb-4' label='Email' id='form1' type='email' onChange={(e)=>{setEmail(e.target.value)}}/>
+              <MDBBadge pill light color='warning'>{MessageUsername}</MDBBadge>
+              <MDBInput wrapperClass='mb-4' label='Username' id='form1' type='text' onChange={(e)=>{setUsername(e.target.value)}}/>
+              <MDBBadge pill light color='warning'>{MessagePassword2}</MDBBadge>
               <MDBInput wrapperClass='mb-4' label='Password' id='form1' type='password' onChange={(e)=>{setPass1(e.target.value)}}/>
+              <MDBBadge pill light color='warning'>{MessagePassword}</MDBBadge>
               <MDBInput wrapperClass='mb-4' label='Re-enter Your Password' id='form1' type='password' onChange={(e)=>{setPass2(e.target.value)}}/>
 
 

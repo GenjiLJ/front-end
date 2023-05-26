@@ -6,7 +6,7 @@ const facerecog=()=>{
 }
 const login = (email, password) => {
     return(
-        axios.post('https://ta-backend-faqihjota-c4luylsyka-et.a.run.app/login',{email, password})
+        axios.post('https://ta-backend-5zjtyu6kjq-et.a.run.app/login',{email, password})
             .then(res=>{
                 return res.data;
             })
@@ -16,7 +16,7 @@ const login = (email, password) => {
 
 const signup = (username,email, password1,password2, imageUrl) => {
     return(
-        axios.post('https://ta-backend-faqihjota-c4luylsyka-et.a.run.app/sign-up',{username,email,password1,password2,imageUrl})
+        axios.post('https://ta-backend-5zjtyu6kjq-et.a.run.app/sign-up',{username,email,password1,password2,imageUrl})
             .then(res=>{
                 return res.data;
             })

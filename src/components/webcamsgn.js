@@ -20,7 +20,7 @@ const Camera = (props) => {
     let image = imageSrc
     // console.log(image)
     // console.log(imageSrc)
-    axios.post('https://ta-backend-faqihjota-c4luylsyka-et.a.run.app/facedetec', {image:imageSrc})
+    axios.post('https://ta-backend-5zjtyu6kjq-et.a.run.app/facedetec', {image:imageSrc})
       .then ( res => {
         setFacedetec(res.data.image)
         // setName(res.data)

@@ -40,7 +40,7 @@ const WebcamCapture = () => {
     const email= token.sub.email 
     const imageSrc = webcamRef.current.getScreenshot();
                 //for deployment, you should put your backend url / api
-    axios.post('https://ta-backend-faqihjota-c4luylsyka-et.a.run.app/facerecog', {imageSrc,email})
+    axios.post('https://ta-backend-5zjtyu6kjq-et.a.run.app/facerecog', {imageSrc,email})
     	  .then(res => {
           setResult(res.data.result)
           setAcuracy(res.data.facenet)

@@ -41,8 +41,8 @@ const Card = () => {
     const token= decodeToken(localStorage.getItem('Token'))
     const username = token.sub.username
     const image = token.sub.image
-    console.log(username)
-    console.log(token.exp)
+    // console.log(username)
+    // console.log(token.exp)
     if (token.exp * 1000 < date){
       return <Navigate to='/login'/>
     }

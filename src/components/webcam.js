@@ -73,7 +73,7 @@ const WebcamCapture = () => {
     console.log(nicetry)
     return <Navigate to='/login'/>
   }
-  if(accuracy>80){
+  if(accuracy>90){
     localStorage.setItem('Authenticated',true)
     return <Navigate to='/card'/>
   }
